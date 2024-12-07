@@ -38,7 +38,7 @@ OBJ = $(addsuffix /Solution.o, $(PATHS))
 $(info OBJ: $(OBJ))
 
 # day1/part1/Solution, day1/part2/Solution, day2/part1/Solution, day2/part2/Solution, etc.
-EXECUTABLES = $(addsuffix /Solution, $(PATHS))
+EXECUTABLES = $(addsuffix /Solution.exe, $(PATHS))
 $(info EXECUTABLES: $(EXECUTABLES))
 
 $(info )
@@ -46,7 +46,7 @@ $(info )
 
 all: $(EXECUTABLES)
 
-$(EXECUTABLES): %: $(addsuffix .o, %) $(SHARED_OBJ)
+$(EXECUTABLES): %.exe: %.o $(SHARED_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 # Rule to compile object files for a specific day and part
