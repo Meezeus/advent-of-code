@@ -26,7 +26,7 @@ $(info PARTS: $(PARTS))
 $(info )
 
 
-# day1/part1, day1/part2, day2/part1, day2/part2 etc.
+# day1/part1, day1/part2, day2/part1, day2/part2, etc.
 PATHS = $(foreach day, $(DAYS), $(foreach part, $(PARTS), $(day)/$(part)))
 $(info PATHS: $(PATHS))
 
@@ -46,6 +46,8 @@ $(info )
 
 all: $(EXECUTABLES)
 
+# Rule to link object files for a specific day and part, plus the shared object
+# files, into an executable
 $(EXECUTABLES): %.exe: %.o $(SHARED_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
