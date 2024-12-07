@@ -36,7 +36,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "Example Solution: " << Solution::Solve(exampleInput) << " (expected 31)" << std::endl;
-	std::cout << "Input Solution: "   << Solution::Solve(input)                           << std::endl;
+	std::cout << "Input Solution: "   << Solution::Solve(input)                            << std::endl;
 	std::cout << std::endl;
 }
 
