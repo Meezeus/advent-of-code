@@ -28,13 +28,26 @@
 //------------------------------------------------------------------------------
 int main()
 {
+	std::cout << std::endl;
+
 	std::filesystem::path root = std::filesystem::canonical("/proc/self/exe").parent_path();
+
+	std::cout << "Example Solution: ";
 	std::vector<std::string> exampleInput = Helper::ReadLines(root / "example.txt");
-	std::vector<std::string> input        = Helper::ReadLines(root / "input.txt");
+	if (!exampleInput.empty())
+	{
+		std::cout << Solution::Solve(exampleInput) << " (expected X)" << std::endl;
+	}
 
 	std::cout << std::endl;
-	std::cout << "Example Solution: " << Solution::Solve(exampleInput) << " (expected X)" << std::endl;
-	std::cout << "Input Solution: "   << Solution::Solve(input)                           << std::endl;
+
+	std::cout << "Input Solution: ";
+	std::vector<std::string> input = Helper::ReadLines(root / "input.txt");
+	if (!input.empty())
+	{
+		std::cout << Solution::Solve(input) << std::endl;
+	}
+
 	std::cout << std::endl;
 }
 
