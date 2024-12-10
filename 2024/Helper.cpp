@@ -37,7 +37,7 @@ std::vector<std::string> ReadLines(const std::string fileName)
 	std::ifstream inputFile(fileName);
 	if (inputFile.fail())
 	{
-		std::cout << "The file doesn't exist you dummy!" << std::endl;
+		Print("The file {} doesn't exist!", fileName);
 		return lines;
 	}
 
