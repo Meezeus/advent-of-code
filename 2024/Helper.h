@@ -30,7 +30,7 @@ namespace Helper
 //		ReadLines - Reads the file corresponding to the given file name and
 //		returns its contents as a list of lines.
 //------------------------------------------------------------------------------
-std::vector<std::string> ReadLines(const std::string fileName);
+std::vector<std::string> ReadLines(const std::string& fileName);
 
 
 
