@@ -17,7 +17,6 @@
 #include "Helper.h"
 
 #include <filesystem>
-#include <iostream>
 
 
 
@@ -63,8 +62,12 @@ namespace Solution
 //==============================================================================
 //		Solve - Returns the solution to the problem for the given input.
 //------------------------------------------------------------------------------
-int Solve(std::vector<std::string> input)
+int Solve(std::vector<std::string> input, bool debug/* = false*/)
 {
+	Helper::PrintIf(debug, "\n//==============================================================================");
+
+	Helper::PrintIf(debug,   "//------------------------------------------------------------------------------");
+	return 0;
 }
 
 

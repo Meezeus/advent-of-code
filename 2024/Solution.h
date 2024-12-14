@@ -38,7 +38,7 @@ namespace Solution
 //==============================================================================
 //		Solve - Returns the solution to the problem for the given input.
 //------------------------------------------------------------------------------
-int Solve(std::vector<std::string> input);
+int Solve(std::vector<std::string> input, bool debug = false);
 
 
 
