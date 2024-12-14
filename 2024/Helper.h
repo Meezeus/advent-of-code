@@ -70,4 +70,51 @@ void PrintIf(bool condition, const std::string& formatString, const auto&... arg
 
 
 
+
+
+//==============================================================================
+//		std::formatter<std::vector<T>, char> - Specialisation of the
+//		std::formatter template for formatting vectors.
+//------------------------------------------------------------------------------
+template <typename T>
+struct std::formatter<std::vector<T>, char>
+{
+	constexpr auto parse(format_parse_context& ctx)
+	{
+		return ctx.begin(); // No special parsing required.
+	}
+
+	template <typename FormatContext>
+	auto format(const std::vector<T>& vec, FormatContext& ctx) const
+	{
+		std::string result = "[";
+		for (size_t i = 0; i < vec.size(); ++i)
+		{
+			if constexpr (std::is_same_v<T, std::string>)
+			{
+				result += "\"" + vec[i] + "\"";
+			}
+			else if constexpr (std::is_arithmetic_v<T>)
+			{
+				result += std::to_string(vec[i]);
+			}
+			else
+			{
+				// Use a stringstream for other types.
+				std::stringstream ss;
+				ss << vec[i];
+				result += ss.str();
+			}
+			if (i != vec.size() - 1)
+			{
+				result += ", ";
+			}
+		}
+		result += "]";
+		return format_to(ctx.out(), "{}", result);
+	}
+};
+
+
+
 #endif // HELPER
