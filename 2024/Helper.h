@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 #include <format>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -45,6 +46,22 @@ std::vector<std::string> ReadLines(const std::string& fileName);
 void Print(const std::string& formatString, const auto&... args)
 {
 	std::cout << std::vformat(formatString, std::make_format_args(args...)) << std::endl;
+}
+
+
+
+
+
+//==============================================================================
+//		PrintIf - Calls Print with the given arguments, but only if the given
+//		condition is true.
+//------------------------------------------------------------------------------
+void PrintIf(bool condition, const std::string& formatString, const auto&... args)
+{
+	if (condition)
+	{
+		Print(formatString, args...);
+	}
 }
 
 
