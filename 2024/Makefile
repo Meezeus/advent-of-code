@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++20
+CXXFLAGS = -std=c++20 -g -Wall -Wextra
 INCLUDE_PATHS = -I.
 
 SHARED_SRC = Helper.cpp
