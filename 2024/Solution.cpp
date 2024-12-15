@@ -14,6 +14,7 @@
 //------------------------------------------------------------------------------
 #include "Solution.h"
 
+#include "ANSIEscapeCodes.h"
 #include "Helper.h"
 
 #include <filesystem>
@@ -31,16 +32,16 @@ int main()
 
 	std::filesystem::path root = std::filesystem::canonical("/proc/self/exe").parent_path();
 
-	std::cout << "Example Solution: ";
+	std::cout << ANSIEscapeCodes::BOLD << "Example Solution: " << ANSIEscapeCodes::RESET;
 	std::vector<std::string> exampleInput = Helper::ReadLines(root / "example.txt");
 	if (!exampleInput.empty())
 	{
-		std::cout << Solution::Solve(exampleInput) << " (expected X)" << std::endl;
+		std::cout << Solution::Solve(exampleInput) << ANSIEscapeCodes::ITALIC << " (expected X)" << ANSIEscapeCodes::RESET << std::endl;
 	}
 
 	std::cout << std::endl;
 
-	std::cout << "Input Solution: ";
+	std::cout << ANSIEscapeCodes::BOLD << "Input Solution: " << ANSIEscapeCodes::RESET;
 	std::vector<std::string> input = Helper::ReadLines(root / "input.txt");
 	if (!input.empty())
 	{
@@ -64,9 +65,9 @@ namespace Solution
 //------------------------------------------------------------------------------
 int Solve(std::vector<std::string> input, bool debug/* = false*/)
 {
-	Helper::PrintIf(debug, "\n//==============================================================================");
+	Helper::PrintIf(debug, "\n==============================================================================");
 
-	Helper::PrintIf(debug,   "//------------------------------------------------------------------------------");
+	Helper::PrintIf(debug,   "------------------------------------------------------------------------------");
 	return 0;
 }
 
