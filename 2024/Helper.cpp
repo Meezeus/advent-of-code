@@ -14,6 +14,8 @@
 //------------------------------------------------------------------------------
 #include "Helper.h"
 
+#include "ANSIEscapeCodes.h"
+
 #include <fstream>
 
 
@@ -36,7 +38,9 @@ std::vector<std::string> ReadLines(const std::string& fileName)
 	std::ifstream inputFile(fileName);
 	if (inputFile.fail())
 	{
+		std::cout << ANSIEscapeCodes::RED;
 		Print("The file {} doesn't exist!", fileName);
+		std::cout << ANSIEscapeCodes::RESET;
 		return lines;
 	}
 
