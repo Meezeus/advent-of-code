@@ -14,11 +14,34 @@
 //==============================================================================
 //		Includes
 //------------------------------------------------------------------------------
+#include <csignal>
 #include <format>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
+
+
+
+
+
+//==============================================================================
+//		REQUIRE - Crashes the program and prints an error message if the
+//		condition evaluates to false.
+//------------------------------------------------------------------------------
+#define REQUIRE(condition) \
+	do \
+	{ \
+		if (!(condition)) \
+		{ \
+			std::cout << ANSIEscapeCodes::RED \
+					  << "Require failed: " #condition \
+					  << "\n\t in file \"" << __FILE__ << "::" << __LINE__ << "\"" \
+					  << "\n\t in function \"" << __func__ << "\"" \
+					  << ANSIEscapeCodes::RESET << std::endl; \
+			__builtin_trap(); \
+		} \
+	} while (false)
 
 
 
