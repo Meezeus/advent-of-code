@@ -2,7 +2,8 @@ CXX = g++
 CXXFLAGS = -std=c++20 -g -Wall -Wextra
 INCLUDE_PATHS = -I.
 
-SHARED_SRC = Helper.cpp
+SHARED_HDR = Helper.h
+SHARED_SRC = $(SHARED_HDR:.h=.cpp)
 SHARED_OBJ = $(SHARED_SRC:.cpp=.o)
 
 
@@ -52,12 +53,12 @@ $(EXECUTABLES): %.exe: %.o $(SHARED_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 # Rule to compile object files for a specific day and part
-$(OBJ): %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDE_PATHS) -c $^ -o $@
+$(OBJ): %.o: %.cpp ${SHARED_HDR}
+	$(CXX) $(CXXFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 # Rule to compile shared object files
-$(SHARED_OBJ): $(SHARED_SRC)
-	$(CXX) $(CXXFLAGS) -c $^ -o $@
+$(SHARED_OBJ): $(SHARED_SRC) ${SHARED_HDR}
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
 ANSIEscapeCodes: ANSIEscapeCodes.cpp
