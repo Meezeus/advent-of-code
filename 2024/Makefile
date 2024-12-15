@@ -59,6 +59,11 @@ $(OBJ): %.o: %.cpp
 $(SHARED_OBJ): $(SHARED_SRC)
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
+
+ANSIEscapeCodes: ANSIEscapeCodes.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@.exe
+
+
 # Rule to remove all executables and object files
 clean:
 	rm -f $(EXECUTABLES) $(OBJ) $(SHARED_OBJ)
