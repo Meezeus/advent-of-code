@@ -2,8 +2,12 @@ CXX = g++
 CXXFLAGS = -std=c++20 -g -Wall -Wextra
 INCLUDE_PATHS = -I.
 
+# Shared headers (including .inl files).
 SHARED_HDR = Helper.h
-SHARED_OBJ = $(SHARED_HDR:.h=.o)
+SHARED_OBJ = $(foreach header, $(filter %.h, $(SHARED_HDR)), $(header:.h=.o))
+$(info SHARED_OBJ: $(SHARED_OBJ))
+
+$(info )
 
 
 DAY_NUMBERS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
