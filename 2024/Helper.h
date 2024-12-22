@@ -65,7 +65,16 @@ std::vector<std::string> ReadLines(const std::string& fileName);
 
 
 //==============================================================================
-//		Print - Format args according to the format string and then print the
+//		Format - Formats args according to the format string.
+//------------------------------------------------------------------------------
+std::string Format(const std::string& formatString, const auto&... args);
+
+
+
+
+
+//==============================================================================
+//		Print - Calls Format with the given arguments and then prints the
 //		result.
 //------------------------------------------------------------------------------
 void Print(const std::string& formatString, const auto&... args);

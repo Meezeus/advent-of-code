@@ -17,12 +17,24 @@ namespace Helper
 
 
 //==============================================================================
-//		Print - Format args according to the format string and then print the
+//		Format - Formats args according to the format string.
+//------------------------------------------------------------------------------
+std::string Format(const std::string& formatString, const auto&... args)
+{
+	return std::vformat(formatString, std::make_format_args(args...));
+}
+
+
+
+
+
+//==============================================================================
+//		Print - Calls Format with the given arguments and then prints the
 //		result.
 //------------------------------------------------------------------------------
 void Print(const std::string& formatString, const auto&... args)
 {
-	std::cout << std::vformat(formatString, std::make_format_args(args...)) << std::endl;
+	std::cout << Format(formatString, args...) << std::endl;
 }
 
 
