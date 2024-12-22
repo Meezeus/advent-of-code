@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++20 -g -Wall -Wextra
 INCLUDE_PATHS = -I.
 
 # Shared headers (including .inl files).
-SHARED_HDR = Helper.h
+SHARED_HDR = Helper.h Helper.inl
 SHARED_OBJ = $(foreach header, $(filter %.h, $(SHARED_HDR)), $(header:.h=.o))
 $(info SHARED_OBJ: $(SHARED_OBJ))
 
