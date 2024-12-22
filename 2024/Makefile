@@ -3,8 +3,7 @@ CXXFLAGS = -std=c++20 -g -Wall -Wextra
 INCLUDE_PATHS = -I.
 
 SHARED_HDR = Helper.h
-SHARED_SRC = $(SHARED_HDR:.h=.cpp)
-SHARED_OBJ = $(SHARED_SRC:.cpp=.o)
+SHARED_OBJ = $(SHARED_HDR:.h=.o)
 
 
 DAY_NUMBERS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
@@ -57,7 +56,7 @@ $(OBJ): %.o: %.cpp $(SHARED_HDR)
 	$(CXX) $(CXXFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 # Rule to compile shared object files
-$(SHARED_OBJ): $(SHARED_SRC) $(SHARED_HDR)
+$(SHARED_OBJ): %.o: %.cpp $(SHARED_HDR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
