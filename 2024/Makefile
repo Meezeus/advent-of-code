@@ -1,11 +1,18 @@
 CXX = g++
-CXXFLAGS = -std=c++20 -g -Wall -Wextra
+CXXFLAGS = -std=c++20 -g -Wall -Wextra -MMD -MP
 INCLUDE_PATHS = -I.
 
 # Shared headers (including .inl files).
 SHARED_HDR = Helper.h Helper.inl
+
 SHARED_OBJ = $(foreach header, $(filter %.h, $(SHARED_HDR)), $(header:.h=.o))
 $(info SHARED_OBJ: $(SHARED_OBJ))
+
+$(info )
+
+
+SHARED_DEP = $(SHARED_OBJ:.o=.d)
+$(info SHARED_DEP: $(SHARED_DEP))
 
 $(info )
 
@@ -37,6 +44,16 @@ $(info )
 OBJ = $(addsuffix /Solution.o, $(PATHS))
 $(info OBJ: $(OBJ))
 
+$(info )
+
+
+# day1/part1/Solution.d, day1/part2/Solution.o, day2/part1/Solution.d, day2/part2/Solution.d, etc.
+DEP = $(OBJ:.o=.d)
+$(info DEP: $(DEP))
+
+$(info )
+
+
 # day1/part1/Solution, day1/part2/Solution, day2/part1/Solution, day2/part2/Solution, etc.
 EXECUTABLES = $(addsuffix /Solution.exe, $(PATHS))
 $(info EXECUTABLES: $(EXECUTABLES))
@@ -52,11 +69,13 @@ $(EXECUTABLES): %.exe: %.o $(SHARED_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 # Rule to compile object files for a specific day and part
-$(OBJ): %.o: %.cpp %.h $(SHARED_HDR)
+-include $(DEP)
+$(OBJ): %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 # Rule to compile shared object files
-$(SHARED_OBJ): %.o: %.cpp %.h $(SHARED_HDR)
+-include $(SHARED_DEP)
+$(SHARED_OBJ): %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 
@@ -66,4 +85,4 @@ ANSIEscapeCodes: ANSIEscapeCodes.cpp
 
 # Rule to remove all executables and object files
 clean:
-	rm -f $(EXECUTABLES) $(OBJ) $(SHARED_OBJ)
+	rm -f $(EXECUTABLES) $(OBJ) $(DEP) $(SHARED_OBJ) $(SHARED_DEP)
