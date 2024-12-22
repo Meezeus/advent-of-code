@@ -17,6 +17,41 @@ namespace Helper
 
 
 //==============================================================================
+//		RequireImpl - Implementation for the REQUIRE macro.
+//-------------------------------------------------------------------------------
+void RequireImpl(const std::string& conditionString,
+                 const std::string& message,
+                 const char*        file,
+                 int                line,
+                 const char*        func,
+                 const auto&...     args)
+{
+	std::cout << ANSIEscapeCodes::RED;
+
+	std::cout << ANSIEscapeCodes::BOLD;
+	std::cout << "Require failed:";
+	std::cout << ANSIEscapeCodes::RESET_BOLD;
+
+	std::cout << ANSIEscapeCodes::RESET_FOREGROUND;
+	std::cout << "\n\tREQUIRE(" << conditionString;
+	if (!message.empty())
+	{
+		std::cout << ", \"" << Format(message, args...) << "\"";
+	}
+	std::cout << ")";
+	std::cout << ANSIEscapeCodes::RED;
+
+	std::cout << "\nin function \"" << func << "\",";
+	std::cout << "\nin file \"" << file << "::" << line << "\"";
+
+	std::cout << ANSIEscapeCodes::RESET << std::endl;
+}
+
+
+
+
+
+//==============================================================================
 //		Format - Formats args according to the format string.
 //------------------------------------------------------------------------------
 std::string Format(const std::string& formatString, const auto&... args)

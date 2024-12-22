@@ -31,16 +31,43 @@
 //		REQUIRE - Crashes the program and prints an error message if the
 //		condition evaluates to false.
 //------------------------------------------------------------------------------
-#define REQUIRE(condition) \
+#define GET_REQUIRE(_1, _2, _3, _4, _5, _6, _7, NAME, ...) NAME
+
+#define REQUIRE(...) GET_REQUIRE(__VA_ARGS__,    /* _X = NumArgs     */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 1 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 2 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 3 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 4 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 5 */\
+                                 REQUIRE_2,      /* _X = NumArgs + 6 */\
+                                 REQUIRE_1       /* _X = NumArgs + 7 */)(__VA_ARGS__)
+
+#define REQUIRE_3_To_N(condition, message, ...) \
 	do \
 	{ \
 		if (!(condition)) \
 		{ \
-			std::cout << ANSIEscapeCodes::RED \
-					  << "Require failed: " #condition \
-					  << "\n\t in file \"" << __FILE__ << "::" << __LINE__ << "\"" \
-					  << "\n\t in function \"" << __func__ << "\"" \
-					  << ANSIEscapeCodes::RESET << std::endl; \
+			Helper::RequireImpl(#condition, message, __FILE__, __LINE__, __func__, __VA_ARGS__); \
+			__builtin_trap(); \
+		} \
+	} while (false)
+
+#define REQUIRE_2(condition, message) \
+	do \
+	{ \
+		if (!(condition)) \
+		{ \
+			Helper::RequireImpl(#condition, message, __FILE__, __LINE__, __func__); \
+			__builtin_trap(); \
+		} \
+	} while (false)
+
+#define REQUIRE_1(condition) \
+	do \
+	{ \
+		if (!(condition)) \
+		{ \
+			Helper::RequireImpl(#condition, "", __FILE__, __LINE__, __func__); \
 			__builtin_trap(); \
 		} \
 	} while (false)
@@ -51,6 +78,20 @@
 
 namespace Helper
 {
+
+
+
+//==============================================================================
+//		RequireImpl - Implementation for the REQUIRE macro.
+//------------------------------------------------------------------------------
+void RequireImpl(const std::string& conditionString,
+                 const std::string& message,
+                 const char*        file,
+                 int                line,
+                 const char*        func,
+                 const auto&...     args);
+
+
 
 
 
