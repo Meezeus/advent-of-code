@@ -7,8 +7,6 @@ SHARED_OBJ = $(SHARED_HDR:.h=.o)
 
 
 DAY_NUMBERS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-$(info DAY_NUMBERS: $(DAY_NUMBERS))
-
 # day1, day2, etc.
 DAYS = $(addprefix day, $(DAY_NUMBERS))
 $(info DAYS: $(DAYS))
@@ -17,8 +15,6 @@ $(info )
 
 
 PART_NUMBERS = 1 2
-$(info PART_NUMBERS: $(PART_NUMBERS))
-
 # part1, part2, etc.
 PARTS = $(addprefix part, $(PART_NUMBERS))
 $(info PARTS: $(PARTS))
