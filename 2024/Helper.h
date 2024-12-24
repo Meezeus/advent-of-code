@@ -31,7 +31,7 @@
 //		REQUIRE - Crashes the program and prints an error message if the
 //		condition evaluates to false.
 //------------------------------------------------------------------------------
-#define GET_REQUIRE(_1, _2, _3, _4, _5, _6, _7, NAME, ...) NAME
+#define GET_REQUIRE(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, NAME, ...) NAME
 
 #define REQUIRE(...) GET_REQUIRE(__VA_ARGS__,    /* _X = NumArgs     */\
                                  REQUIRE_3_To_N, /* _X = NumArgs + 1 */\
@@ -39,8 +39,13 @@
                                  REQUIRE_3_To_N, /* _X = NumArgs + 3 */\
                                  REQUIRE_3_To_N, /* _X = NumArgs + 4 */\
                                  REQUIRE_3_To_N, /* _X = NumArgs + 5 */\
-                                 REQUIRE_2,      /* _X = NumArgs + 6 */\
-                                 REQUIRE_1       /* _X = NumArgs + 7 */)(__VA_ARGS__)
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 6 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 7 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 8 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 9 */\
+                                 REQUIRE_3_To_N, /* _X = NumArgs + 10 */\
+                                 REQUIRE_2,      /* _X = NumArgs + 11 */\
+                                 REQUIRE_1       /* _X = NumArgs + 12 */)(__VA_ARGS__)
 
 #define REQUIRE_3_To_N(condition, message, ...) \
 	do \
