@@ -3,7 +3,7 @@
 //		Helper.h
 //
 //	Description:
-//		Advent of Code 2024 Helper functions and classes
+//		Advent of Code 2024 Helper functions
 //		(https://adventofcode.com/2024)
 //------------------------------------------------------------------------------
 #ifndef HELPER
@@ -18,6 +18,7 @@
 
 #include <csignal>
 #include <format>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -137,7 +138,7 @@ void PrintIf(bool condition, const std::string& formatString, const auto&... arg
 
 
 
-}
+} // Helper
 
 
 
@@ -149,6 +150,17 @@ void PrintIf(bool condition, const std::string& formatString, const auto&... arg
 //------------------------------------------------------------------------------
 template <typename T>
 struct std::formatter<std::vector<T>, char>;
+
+
+
+
+
+//==============================================================================
+//		std::formatter<std::vector<std::vector<T>>, char> - Specialisation of
+//		the std::formatter template for formatting vectors of vectors.
+//------------------------------------------------------------------------------
+template <typename T>
+struct std::formatter<std::vector<std::vector<T>>, char>;
 
 
 

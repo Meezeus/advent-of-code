@@ -3,7 +3,7 @@
 //		Helper.inl
 //
 //	Description:
-//		Advent of Code 2024 Helper functions and classes
+//		Advent of Code 2024 Helper functions
 //		(https://adventofcode.com/2024)
 //------------------------------------------------------------------------------
 
@@ -136,5 +136,62 @@ struct std::formatter<std::vector<T>, char>
 		}
 		result += "]";
 		return format_to(ctx.out(), "{}", result);
+	}
+};
+
+
+
+
+
+//==============================================================================
+//		std::formatter<std::vector<std::vector<T>>, char> - Specialisation of
+//		the std::formatter template for formatting vectors of vectors.
+//------------------------------------------------------------------------------
+template <typename T>
+struct std::formatter<std::vector<std::vector<T>>, char>
+{
+	constexpr auto parse(format_parse_context& ctx)
+	{
+		return ctx.begin(); // No special parsing required.
+	}
+
+	template <typename FormatContext>
+	auto format(const std::vector<std::vector<T>>& grid, FormatContext& ctx) const
+	{
+		// Find the maximum width of any element in the grid.
+		size_t maxWidth = 0;
+		for (size_t rowIndex = 0; rowIndex < grid.size(); ++rowIndex)
+		{
+			for (size_t colIndex = 0; colIndex < grid[rowIndex].size(); ++colIndex)
+			{
+				std::ostringstream oss;
+				oss << grid[rowIndex][colIndex];
+				maxWidth = std::max(maxWidth, oss.str().length());
+			}
+		}
+
+		// Format the grid row by row with aligned columns.
+		std::string result = "[\n";
+		for (size_t rowIndex = 0; rowIndex < grid.size(); ++rowIndex)
+		{
+			result += "    [";
+			for (size_t colIndex = 0; colIndex < grid[rowIndex].size(); ++colIndex)
+			{
+				std::ostringstream oss;
+				oss << std::setw(maxWidth) << grid[rowIndex][colIndex];
+				result += oss.str();
+				if (colIndex != grid[rowIndex].size() - 1)
+				{
+					result += " ";
+				}
+			}
+			result += "]";
+			if (rowIndex != grid.size() - 1)
+			{
+				result += "\n";
+			}
+		}
+		result += "\n]";
+		return std::format_to(ctx.out(), "{}", result);
 	}
 };

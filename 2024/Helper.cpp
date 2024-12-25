@@ -3,7 +3,7 @@
 //		Helper.cpp
 //
 //	Description:
-//		Advent of Code 2024 Helper functions and classes
+//		Advent of Code 2024 Helper functions
 //		(https://adventofcode.com/2024)
 //------------------------------------------------------------------------------
 
