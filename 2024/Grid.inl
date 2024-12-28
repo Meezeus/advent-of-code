@@ -10,6 +10,19 @@
 
 
 //==============================================================================
+//		GridPosition::operator<(const GridPosition& other) const
+//------------------------------------------------------------------------------
+bool GridPosition::operator<(const GridPosition& other) const
+{
+	return (rowIndex <  other.rowIndex) ||
+	       (rowIndex == other.rowIndex  && colIndex < other.colIndex);
+}
+
+
+
+
+
+//==============================================================================
 //		Grid::Grid(size_t height, size_t width, T val);
 //------------------------------------------------------------------------------
 template<typename T>

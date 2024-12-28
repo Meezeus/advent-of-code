@@ -30,6 +30,8 @@ struct GridPosition
 {
 	int rowIndex;
 	int colIndex;
+
+	bool operator<(const GridPosition& other) const;
 };
 
 
