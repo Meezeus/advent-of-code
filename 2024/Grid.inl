@@ -23,6 +23,37 @@ bool GridPosition::operator<(const GridPosition& other) const
 
 
 //==============================================================================
+//		std::formatter<GridPosition, char> - Specialisation of the std::formatter
+//		template for grid positions.
+//------------------------------------------------------------------------------
+template <>
+struct std::formatter<GridPosition, char>
+{
+	constexpr auto parse(format_parse_context& ctx)
+	{
+		return ctx.begin(); // No special parsing required.
+	}
+
+	template <typename FormatContext>
+	auto format(const GridPosition& gridPosition, FormatContext& ctx) const
+	{
+		std::string result = "(";
+
+		result += std::to_string(gridPosition.rowIndex);
+		result += ", ";
+		result += std::to_string(gridPosition.colIndex);
+
+		result += ")";
+
+		return std::format_to(ctx.out(), "{}", result);
+	}
+};
+
+
+
+
+
+//==============================================================================
 //		Grid::Grid(size_t height, size_t width, T val);
 //------------------------------------------------------------------------------
 template<typename T>

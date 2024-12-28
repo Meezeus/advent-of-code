@@ -39,6 +39,17 @@ struct GridPosition
 
 
 //==============================================================================
+//		std::formatter<GridPosition, char> - Specialisation of the std::formatter
+//		template for grid positions.
+//------------------------------------------------------------------------------
+template <>
+struct std::formatter<GridPosition, char>;
+
+
+
+
+
+//==============================================================================
 //		Grid
 //------------------------------------------------------------------------------
 template<typename T>
