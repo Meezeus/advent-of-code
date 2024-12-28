@@ -60,12 +60,17 @@ public:
 	                                        Grid(const std::vector<std::vector<T>>& grid);
 	                                        Grid(std::vector<std::vector<T>>&& grid);
 
-
 	std::vector<T>&                         operator[](size_t index);
 	const std::vector<T>&                   operator[](size_t index) const;
 
 	T&                                      operator[](const GridPosition& pos);
 	const T&                                operator[](const GridPosition& pos) const;
+
+	auto                                    begin() { return mGrid.begin(); }
+	auto                                    end  () { return mGrid.end();   }
+
+	auto                                    begin() const { return mGrid.cbegin(); }
+	auto                                    end  () const { return mGrid.cend();   }
 
 	size_t                                  GetHeight() const { return mHeight; }
 	size_t                                  GetWidth () const { return mWidth;  }
