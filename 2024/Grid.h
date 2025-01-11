@@ -35,7 +35,9 @@ struct GridPosition
 	GridPosition(int rowIndexIn, int colIndexIn);
 	GridPosition(size_t rowIndexIn, size_t colIndexIn);
 
-	bool operator<(const GridPosition& other) const;
+	bool operator< (const GridPosition& other) const;
+	bool operator==(const GridPosition& other) const;
+	bool operator!=(const GridPosition& other) const;
 };
 
 

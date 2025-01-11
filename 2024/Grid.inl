@@ -47,6 +47,30 @@ bool GridPosition::operator<(const GridPosition& other) const
 
 
 //==============================================================================
+//		GridPosition::operator==(const GridPosition& other) const
+//------------------------------------------------------------------------------
+bool GridPosition::operator==(const GridPosition& other) const
+{
+	return (rowIndex == other.rowIndex) && (colIndex == other.colIndex);
+}
+
+
+
+
+
+//==============================================================================
+//		GridPosition::operator!=(const GridPosition& other) const
+//------------------------------------------------------------------------------
+bool GridPosition::operator!=(const GridPosition& other) const
+{
+	return !(*this == other);
+}
+
+
+
+
+
+//==============================================================================
 //		std::formatter<GridPosition, char> - Specialisation of the std::formatter
 //		template for grid positions.
 //------------------------------------------------------------------------------
