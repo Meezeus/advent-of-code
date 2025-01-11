@@ -20,6 +20,7 @@
 #include <format>
 #include <iomanip>
 #include <iostream>
+#include <set>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -139,6 +140,17 @@ void PrintIf(bool condition, const std::string& formatString, const auto&... arg
 
 
 } // Helper
+
+
+
+
+
+//==============================================================================
+//		std::formatter<std::set<T>, char> - Specialisation of the std::formatter
+//		template for formatting sets.
+//------------------------------------------------------------------------------
+template <typename T>
+struct std::formatter<std::set<T>, char>;
 
 
 

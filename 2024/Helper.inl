@@ -95,6 +95,57 @@ void PrintIf(bool condition, const std::string& formatString, const auto&... arg
 
 
 //==============================================================================
+//		std::formatter<std::set<T>, char> - Specialisation of the std::formatter
+//		template for formatting sets.
+//------------------------------------------------------------------------------
+template <typename T>
+struct std::formatter<std::set<T>, char>
+{
+	constexpr auto parse(format_parse_context& ctx)
+	{
+		return ctx.begin(); // No special parsing required.
+	}
+
+	template <typename FormatContext>
+	auto format(const std::set<T>& set, FormatContext& ctx) const
+	{
+		std::string result = "{";
+		for (typename std::set<T>::const_iterator it = set.cbegin(); it != set.cend(); ++it)
+		{
+			if constexpr (std::is_same_v<T, std::string>)
+			{
+				result += "\"" + *it + "\"";
+			}
+			else if constexpr (std::is_same_v<T, char>)
+			{
+				result += "\'" + std::string(1, *it) + "\'";
+			}
+			else if constexpr (std::is_arithmetic_v<T>)
+			{
+				result += std::to_string(*it);
+			}
+			else
+			{
+				// Use a stringstream for other types.
+				std::stringstream ss;
+				ss << *it;
+				result += ss.str();
+			}
+			if (it != std::prev(set.cend()))
+			{
+				result += ", ";
+			}
+		}
+		result += "}";
+		return format_to(ctx.out(), "{}", result);
+	}
+};
+
+
+
+
+
+//==============================================================================
 //		std::formatter<std::vector<T>, char> - Specialisation of the
 //		std::formatter template for formatting vectors.
 //------------------------------------------------------------------------------
