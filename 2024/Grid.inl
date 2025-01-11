@@ -10,6 +10,30 @@
 
 
 //==============================================================================
+//		GridPosition::GridPosition(int rowIndexIn, int colIndexIn)
+//------------------------------------------------------------------------------
+GridPosition::GridPosition(int rowIndexIn, int colIndexIn)
+	: rowIndex(rowIndexIn)
+	, colIndex(colIndexIn)
+{}
+
+
+
+
+
+//==============================================================================
+//		GridPosition::GridPosition(size_t rowIndexIn, size_t colIndexIn)
+//------------------------------------------------------------------------------
+GridPosition::GridPosition(size_t rowIndexIn, size_t colIndexIn)
+	: rowIndex(static_cast<int>(rowIndexIn))
+	, colIndex(static_cast<int>(colIndexIn))
+{}
+
+
+
+
+
+//==============================================================================
 //		GridPosition::operator<(const GridPosition& other) const
 //------------------------------------------------------------------------------
 bool GridPosition::operator<(const GridPosition& other) const
